@@ -1,38 +1,25 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import './App.css';
 import Wilder from "./components/Wilder";
-
-const wilderProfile = [
-  {
-    name: 'Alan',
-    city: 'Paris',
-    skills: [
-      {title:'PHP', votes: 3}, 
-      {title:'MySql', votes: 23}, 
-      {title:'React', votes: 3}, 
-      {title:'Symfony', votes: 13}
-    ]
-  },
-  {
-    name: 'Manon',
-    city: 'Mexico',
-    skills: [
-      {title:'PHP', votes: 3},
-      {title:'JavaScript', votes: 8},
-      {title:'NodeJs', votes: 13}
-    ]
-  },
-  {
-    name: 'Georgette',
-    city: 'Moscou',
-    skills: [
-      {title:'MongoDb', votes: 6},
-      {title:'React', votes: 3}, 
-      {title:'Symfony', votes: 13}
-    ]
-  }
-];
+import AddWilder from "./components/AddWilder";
 
 function App() {
+  const [wilders, setWilders] = useState([]);
+  useEffect(() => {
+    const fetchWilders = async () => {
+      try {
+        const result = await axios(
+          "http://localhost:5000/api/wilders"
+        );
+        setWilders(result.data.result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchWilders();
+  }, []);
+
   return (
     <div>
       <header>
@@ -43,8 +30,9 @@ function App() {
       <main className="container">
         <h2>Wilders</h2>
         <section className="card-row">
-          {wilderProfile.map((el, index) => <Wilder key={index} {...el}/>)}
+          {wilders.map((el) => <Wilder key={el._id} {...el} />)}
         </section>
+        <AddWilder />
       </main>
       <footer>
         <div className="container">
