@@ -1,12 +1,13 @@
 import React from 'react';
 import blank_profile from './blank_profile.jpeg';
-import Skills from "./Skills";
+import Skill from "./Skill";
+import Proptypes from "prop-types";
 
-const Wilder = (props) => {
+const Wilder = ({name, skills}) => {
   return (
     <article className="card">
       <img src={blank_profile} alt="Jane Doe Profile" />
-      <h3>{props.name}</h3>
+      <h3>{name}</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -14,11 +15,15 @@ const Wilder = (props) => {
         nisi ut aliquip ex ea commodo consequat.
             </p>
       <h4>Wild Skills</h4>
-      <Skills skillType="Symfony"
-            vote= "4"/>
+      <ul className="skills">
+      {skills.map((el) => < Skill {...el}/>)}
+      </ul>
     </article>
-  )
-    ;
+  );
 }
 
+Wilder.propTypes = {
+  name: Proptypes.string.isRequired,
+  skills: Proptypes.array,
+}
 export default Wilder;

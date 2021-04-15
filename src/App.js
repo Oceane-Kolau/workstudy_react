@@ -1,6 +1,30 @@
 import './App.css';
 import Wilder from "./Wilder";
 
+const wilderProfile = [
+  {
+    name: 'Alan',
+    skills: [
+      {title:'PHP', votes: 3}, 
+      {title:'Symfony', votes: 13}
+    ]
+  },
+  {
+    name: 'Manon',
+    skills: [
+      {title:'PHP', votes: 3},
+      {title:'Node', votes: 13}
+    ]
+  },
+  {
+    name: 'Georgette',
+    skills: [
+      {title:'React', votes: 3}, 
+      {title:'Symfony', votes: 13}
+    ]
+  }
+];
+
 function App() {
   return (
     <div>
@@ -12,9 +36,7 @@ function App() {
       <main className="container">
         <h2>Wilders</h2>
         <section className="card-row">
-          <Wilder name="Alan"/>
-          <Wilder name="Manon"/>
-          <Wilder name="Georgette"/> 
+          {wilderProfile.map((el) => <Wilder {...el}/>)}
         </section>
       </main>
       <footer>
