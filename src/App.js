@@ -4,21 +4,28 @@ import Wilder from "./Wilder";
 const wilderProfile = [
   {
     name: 'Alan',
+    city: 'Paris',
     skills: [
       {title:'PHP', votes: 3}, 
+      {title:'MySql', votes: 23}, 
+      {title:'React', votes: 3}, 
       {title:'Symfony', votes: 13}
     ]
   },
   {
     name: 'Manon',
+    city: 'Mexico',
     skills: [
       {title:'PHP', votes: 3},
-      {title:'Node', votes: 13}
+      {title:'JavaScript', votes: 8},
+      {title:'NodeJs', votes: 13}
     ]
   },
   {
     name: 'Georgette',
+    city: 'Moscou',
     skills: [
+      {title:'MongoDb', votes: 6},
       {title:'React', votes: 3}, 
       {title:'Symfony', votes: 13}
     ]

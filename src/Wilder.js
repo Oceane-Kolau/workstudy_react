@@ -3,11 +3,12 @@ import blank_profile from './blank_profile.jpeg';
 import Skill from "./Skill";
 import Proptypes from "prop-types";
 
-const Wilder = ({name, skills}) => {
+const Wilder = ({name, skills, city}) => {
   return (
     <article className="card">
       <img src={blank_profile} alt="Jane Doe Profile" />
-      <h3>{name}</h3>
+      <h2>{name}</h2>
+      <h3>{city}</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
