@@ -1,5 +1,5 @@
 import React from 'react';
-import blank_profile from './blank_profile.jpeg';
+import blank_profile from '../blank_profile.jpeg';
 import Skill from "./Skill";
 import Proptypes from "prop-types";
 

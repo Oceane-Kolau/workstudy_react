@@ -1,5 +1,5 @@
 import './App.css';
-import Wilder from "./Wilder";
+import Wilder from "./components/Wilder";
 
 const wilderProfile = [
   {
