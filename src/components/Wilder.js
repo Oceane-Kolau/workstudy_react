@@ -17,7 +17,7 @@ const Wilder = ({name, skills, city}) => {
             </p>
       <h4>Wild Skills</h4>
       <ul className="skills">
-      {skills.map((el) => < Skill {...el}/>)}
+      {skills.map((skill) => < Skill key={skill.title} {...skill}/>)}
       </ul>
     </article>
   );

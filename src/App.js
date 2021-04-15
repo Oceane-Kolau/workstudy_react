@@ -43,7 +43,7 @@ function App() {
       <main className="container">
         <h2>Wilders</h2>
         <section className="card-row">
-          {wilderProfile.map((el) => <Wilder {...el}/>)}
+          {wilderProfile.map((el, index) => <Wilder key={index} {...el}/>)}
         </section>
       </main>
       <footer>
