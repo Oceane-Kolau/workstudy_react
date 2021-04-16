@@ -2,6 +2,8 @@ import React from 'react';
 import blank_profile from '../blank_profile.jpeg';
 import Skill from "./Skill";
 import Proptypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 const Wilder = ({name, skills, city}) => {
   return (
@@ -15,6 +17,9 @@ const Wilder = ({name, skills, city}) => {
         enim ad minim veniam, quis nostrud exercitation ullamco laboris
         nisi ut aliquip ex ea commodo consequat.
             </p>
+            <button>
+              <FontAwesomeIcon icon={faTrashAlt} size="md" />
+            </button>
       <h4>Wild Skills</h4>
       <ul className="skills">
       {skills.map((skill) => < Skill key={skill.title} {...skill}/>)}

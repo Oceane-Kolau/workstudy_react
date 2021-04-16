@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { ReactComponent as LoadingIcon } from "../icons/loading.svg";
+import { ReactComponent as loadingIcon } from "../icons/loading.svg";
 import axios from "axios";
 
 function AddWilder() {
     const [name, setName] = useState("");
     const [city, setCity] = useState("");
-    const [skills] = useState({title:"React", votes:15}, {title:"MongoDb", votes:5});
+    const [skills] = useState({ title: "React", votes: 15 }, { title: "MongoDb", votes: 5 });
     const [error, setError] = useState("");
-    const[loading, setLoading] = useState("false");
+    const [loading, setLoading] = useState(false);
     return (
         <form
             onSubmit={async (e) => {
                 e.preventDefault();
                 try {
-                    setLoading("true")
+                    setLoading(true)
                     const result = await axios.post("http://localhost:5000/api/wilder/new",
                         {
                             name,
@@ -32,7 +32,7 @@ function AddWilder() {
                         setError(error.message);
                     }
                 } finally {
-                    setLoading("false");
+                    setLoading(false);
                 }
             }}
         >
@@ -53,8 +53,12 @@ function AddWilder() {
                 onChange={(e) => setCity(e.target.value)}
             />
             {error !== "" && <p>{error}</p>}
-            <button showloading={loading}>
-                { loading ? (<img src={LoadingIcon} alt="loading" />) : ("Add")}
+            <button showLoading={loading}>
+                {loading ? (
+                    <img src={loadingIcon} alt="loading" />
+                ) : (
+                    "Add"
+                )}
             </button>
         </form>
     );
