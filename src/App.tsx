@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 import Wilder, { WilderProps } from "./components/Wilder";
 import AddWilder from "./components/AddWilder";
+import { CardRow, Container, Footer, Header } from "./styles/elements";
 
 function App(): JSX.Element {
   const [wilders, setWilders] = useState<WilderProps[]>([]);
@@ -21,14 +22,14 @@ function App(): JSX.Element {
 
   return (
     <div>
-      <header>
-        <div className="container">
+      <Header>
+        <Container>
           <h1>Wilders Book</h1>
-        </div>
-      </header>
-      <main className="container">
+        </Container>
+      </Header>
+      <Container>
         <h2>Wilders</h2>
-        <section className="card-row">
+        <CardRow>
           {wilders.map((wilder) => (
             <Wilder
               key={wilder._id}
@@ -37,14 +38,14 @@ function App(): JSX.Element {
               skills={wilder.skills}
             />
           ))}
-        </section>
+        </CardRow>
         <AddWilder />
-      </main>
-      <footer>
-        <div className="container">
+      </Container>
+      <Footer>
+        <Container>
           <p>&copy; 2020 Wild Code School</p>
-        </div>
-      </footer>
+        </Container>
+      </Footer>
     </div>
   );
 }

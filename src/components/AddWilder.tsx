@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import loadIcon from "../icons/loading.svg";
+import { Button, Error, Form, Input, Label } from "../styles/form-elements";
 
 function AddWilder(): JSX.Element {
   const [name, setName] = useState("");
@@ -9,11 +11,13 @@ function AddWilder(): JSX.Element {
     { title: "MongoDb", votes: 5 },
   ]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   return (
-    <form
+    <Form
       onSubmit={async (e) => {
         e.preventDefault();
         try {
+          setLoading(true);
           const result = await axios.post(
             "http://localhost:5000/api/wilder/new",
             {
@@ -32,28 +36,32 @@ function AddWilder(): JSX.Element {
           } else {
             setError(error.message);
           }
+        } finally {
+          setLoading(false);
         }
       }}
     >
-      <label htmlFor="name-input">Name :</label>
-      <input
+      <Label htmlFor="name-input">Name :</Label>
+      <Input
         id="name-input"
         type="text"
         placeholder="Type the name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <label htmlFor="city-input">City :</label>
-      <input
+      <Label htmlFor="city-input">City :</Label>
+      <Input
         id="city-input"
         type="text"
         placeholder="Type the city"
         value={city}
         onChange={(e) => setCity(e.target.value)}
       />
-      {error !== "" && <p>{error}</p>}
-      <button type="submit">Add</button>
-    </form>
+      {error !== "" && <Error>{error}</Error>}
+      <Button loading={loading}>
+        {loading ? <img src={loadIcon} alt="loading" /> : "Add"}
+      </Button>
+    </Form>
   );
 }
 export default AddWilder;
