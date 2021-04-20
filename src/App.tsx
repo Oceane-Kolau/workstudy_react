@@ -5,7 +5,7 @@ import Wilder, { WilderProps } from "./components/Wilder";
 import AddWilder from "./components/AddWilder";
 
 function App(): JSX.Element {
-  const [wilders, setWilders] = useState([]);
+  const [wilders, setWilders] = useState<WilderProps[]>([]);
   useEffect(() => {
     const fetchWilders = async () => {
       try {
@@ -29,7 +29,7 @@ function App(): JSX.Element {
       <main className="container">
         <h2>Wilders</h2>
         <section className="card-row">
-          {wilders.map((wilder: WilderProps) => (
+          {wilders.map((wilder) => (
             <Wilder
               key={wilder._id}
               name={wilder.name}

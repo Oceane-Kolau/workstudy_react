@@ -4,7 +4,10 @@ import axios from "axios";
 function AddWilder(): JSX.Element {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
-  const [skills] = useState({ title: "React", votes: 15 }); // , { title: "MongoDb", votes: 5 }
+  const [skills] = useState([
+    { title: "Typescript", votes: 15 },
+    { title: "MongoDb", votes: 5 },
+  ]);
   const [error, setError] = useState("");
   return (
     <form
