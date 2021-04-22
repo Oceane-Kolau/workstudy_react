@@ -1,0 +1,16 @@
+type Skill {
+  id: ID
+  title: String @fake(type:word)
+  votes: Int @fake(type:number, options:{maxNumber:10, minNumber:0}) 
+}
+
+type Wilder {
+  id: ID
+  name: String @fake(type:firstName)
+  city: String @fake(type:city)
+  skills: [Skill]
+}
+
+type Query {
+  allWilders:[Wilder] @listLength(min:5, max: 20)
+}
