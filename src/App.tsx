@@ -1,46 +1,19 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import "./App.css";
-import Wilder, { WilderProps } from "./components/Wilder";
+import { BrowserRouter, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import AddWilder from "./components/AddWilder";
-import { CardRow, Container, Footer, Header } from "./styles/elements";
+import { Container, Footer } from "./styles/elements";
+import WilderList from "./components/WilderList";
 
 function App(): JSX.Element {
-  const [wilders, setWilders] = useState<WilderProps[]>([]);
-  useEffect(() => {
-    const fetchWilders = async () => {
-      try {
-        const result = await axios("http://localhost:5000/api/wilders");
-        setWilders(result.data.result);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(error);
-      }
-    };
-    fetchWilders();
-  }, []);
-
   return (
     <div>
-      <Header>
-        <Container>
-          <h1>Wilders Book</h1>
-        </Container>
-      </Header>
-      <Container>
-        <h2>Wilders</h2>
-        <CardRow>
-          {wilders.map((wilder) => (
-            <Wilder
-              key={wilder._id}
-              name={wilder.name}
-              city={wilder.city}
-              skills={wilder.skills}
-            />
-          ))}
-        </CardRow>
-        <AddWilder />
-      </Container>
+      <BrowserRouter>
+        <NavBar />
+        <Route exact path="/" component={WilderList} />
+        <Route exact path="/addWilder" component={AddWilder} />
+      </BrowserRouter>
       <Footer>
         <Container>
           <p>&copy; 2020 Wild Code School</p>
