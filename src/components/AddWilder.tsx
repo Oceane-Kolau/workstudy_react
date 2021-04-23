@@ -1,46 +1,38 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useMutation, gql } from "@apollo/client";
 import loadIcon from "../icons/loading.svg";
 import { Button, Error, Form, Input, Label } from "../styles/form-elements";
+
+const CREATE_WILDER = gql`
+  mutation CreateWilder($input: InputWilder!) {
+    createWilder(input: $input) {
+      name
+      city
+    }
+  }
+`;
 
 function AddWilder(): JSX.Element {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
-  const [skills] = useState([
-    { title: "Typescript", votes: 15 },
-    { title: "MongoDb", votes: 5 },
-  ]);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const [createWilder, { data, loading, error }] = useMutation(CREATE_WILDER);
+  console.log(createWilder);
   return (
     <Form
-      onSubmit={async (e: React.SyntheticEvent) => {
+      onSubmit={(e) => {
         e.preventDefault();
-        try {
-          setLoading(true);
-          const result = await axios.post(
-            "http://localhost:5000/api/wilder/new",
-            {
+        createWilder({
+          variables: {
+            input: {
               name,
               city,
-              skills,
-            }
-          );
-          if (result.data.success) {
-            setError("");
-          }
-          // eslint-disable-next-line @typescript-eslint/no-shadow
-        } catch (error) {
-          if (error.response) {
-            setError(error.response.data.message);
-          } else {
-            setError(error.message);
-          }
-        } finally {
-          setLoading(false);
-        }
+            },
+          },
+        });
       }}
     >
+      {data && <p>wilder {data.createWilder.name} a été ajouté.e</p>}
       <Label htmlFor="name-input">Name :</Label>
       <Input
         id="name-input"
@@ -61,7 +53,7 @@ function AddWilder(): JSX.Element {
           setCity(e.target.value)
         }
       />
-      {error !== "" && <Error>{error}</Error>}
+      {error ? <Error>{error}</Error> : ""}
       <Button loading={loading}>
         {loading ? <img src={loadIcon} alt="loading" /> : "Add"}
       </Button>
